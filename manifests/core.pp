@@ -14,5 +14,6 @@ define solr::core (
     command => "${::solr::solr_base}/bin/solr create -c ${core_name}",
     cwd     => $::solr::solr_base,
     creates => "${::solr::solr_home}/${core_name}",
+    user    => $::solr::solr_user,
   }
 }
