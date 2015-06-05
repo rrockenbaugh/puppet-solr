@@ -20,8 +20,9 @@ describe 'solr' do
           it { is_expected.to contain_class('solr::service').that_subscribes_to('solr::config') }
 
           it { is_expected.to contain_staging__deploy('solr-5.1.0.tgz').with(
-            :target => '/opt',
-            :source => 'http://www.apache.org/dist/lucene/solr/5.1.0/solr-5.1.0.tgz'
+            :target => '/opt/staging',
+            :source => 'http://www.apache.org/dist/lucene/solr/5.1.0/solr-5.1.0.tgz',
+            :staging_path => '/opt/staging/solr-5.1.0.tgz',
           ) }
           it { is_expected.to contain_user('solr').with(
             :ensure => 'present',

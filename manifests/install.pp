@@ -5,8 +5,10 @@
 class solr::install {
 
   ::staging::deploy { "solr-5.1.0.tgz":
-    target => "/opt",
+    target => "/opt/staging",
     source => "http://www.apache.org/dist/lucene/solr/5.1.0/solr-5.1.0.tgz",
+    staging_path => "/opt/staging/solr-5.1.0.tgz",
+    creates => "/opt/staging/solr-5.1.0",
   }
   user { "solr":
     ensure     => present,

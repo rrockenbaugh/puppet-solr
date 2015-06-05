@@ -16,7 +16,12 @@ describe 'solr::core', :type => :define do
           it { is_expected.to compile.with_all_deps }
           it { is_expected.to contain_solr__core('test') }
 
-          it { is_expected.to contain_exec('create test core') }
+          it { is_expected.to contain_exec('create test core').with(
+            :command => '/opt/solr/bin/solr create -c test',
+            :cwd => '/opt/solr',
+            :creates => '/var/solr/data/test',
+            :user => 'solr'
+          ) }
         end
       end
     end
