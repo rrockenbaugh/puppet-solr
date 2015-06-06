@@ -19,6 +19,10 @@ class solr (
   $install_dir = $::solr::params::install_dir,
   $java_home = $::solr::params::java_home,
   $java_mem = $::solr::params::java_mem,
+  $zk_ensemble = $::solr::params::zk_ensemble,
+  $zk_timeout = $::solr::params::zk_timeout,
+  $solr_host = $::solr::params::solr_host,
+  $solr_time = $::solr::params::solr_time,
   $service_name = $::solr::params::service_name,
   $solr_base = $::solr::params::solr_base,
 ) inherits ::solr::params {
@@ -33,6 +37,10 @@ class solr (
   validate_string( $solr_user )
   validate_absolute_path( $install_dir )
   validate_absolute_path( $solr_base )
+  validate_string( $zk_ensemble )
+  validate_string( $zk_timeout )
+  validate_string( $solr_host )
+  validate_string( $solr_time )
 
   class { '::solr::install': } ->
   class { '::solr::config': } ~>

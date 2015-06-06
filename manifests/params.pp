@@ -15,6 +15,10 @@ class solr::params {
   $install_dir = "/opt/solr-${version}"
   $java_home   = undef
   $java_mem    = '-Xms512m -Xmx512m'
+  $zk_ensemble = undef
+  $zk_timeout  = '15000'
+  $solr_host   = $::ipaddress
+  $solr_time   = 'UTC'
 
   case $::osfamily {
     'Debian', 'RedHat', 'Amazon': {
