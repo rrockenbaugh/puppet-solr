@@ -3,28 +3,28 @@
 # This class is called from solr for service config.
 #
 class solr::config {
-  file { "/var/solr/solr.in.sh":
+  file { "${solr::var_dir}/solr.in.sh":
     ensure  => file,
     mode    => '0755',
-    owner   => "solr",
-    group   => "solr",
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     content => template('solr/solr.in.sh.erb'),
   }
-  file { "/opt/solr-5.1.0/server/resources/log4j.properties":
+  file { "${solr::extract_dir}/solr-${solr::version}/server/resources/log4j.properties":
     ensure  => file,
     mode    => '0644',
-    owner   => "solr",
-    group   => "solr",
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     content => template('solr/log4j.properties.erb'),
   }
-  file { "/var/solr/log4j.properties":
+  file { "${solr::var_dir}/log4j.properties":
     ensure  => file,
     mode    => '0644',
-    owner   => "solr",
-    group   => "solr",
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     content => template('solr/log4j.properties.erb'),
   }
-  file { "/etc/init.d/solr":
+  file { "/etc/init.d/${solr::service_name}":
     ensure  => file,
     mode    => '0744',
     content => template('solr/solr.init.erb'),

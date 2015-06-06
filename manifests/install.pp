@@ -4,11 +4,11 @@
 #
 class solr::install {
 
-  ::staging::deploy { "solr-5.1.0.tgz":
-    target => "/opt/staging",
-    source => "http://www.apache.org/dist/lucene/solr/5.1.0/solr-5.1.0.tgz",
-    staging_path => "/opt/staging/solr-5.1.0.tgz",
-    creates => "/opt/staging/solr-5.1.0",
+  staging::deploy { "solr-${solr::version}.tgz":
+    target => '/opt/staging',
+    source => "${solr::mirror}/${solr::version}/solr-${solr::version}.tgz",
+    staging_path => "/opt/staging/solr-${solr::version}.tgz",
+    creates => "/opt/staging/solr-${solr::version}",
   }
   user { "solr":
     ensure     => present,
@@ -17,22 +17,22 @@ class solr::install {
     before     => Exec['run solr install script'],
   }
   exec { 'run solr install script':
-    command => "/opt/staging/solr-5.1.0/bin/install_solr_service.sh /opt/staging/solr-5.1.0.tgz -i /opt -d /var/solr -u solr -s solr -p 8983",
-    cwd     => "/opt/staging/solr-5.1.0",
-    creates => "/opt/solr-5.1.0",
-    require => Staging::Deploy["solr-5.1.0.tgz"],
+    command => "/opt/staging/solr-${solr::version}/bin/install_solr_service.sh /opt/staging/solr-${solr::version}.tgz -i ${solr::extract_dir} -d ${solr::var_dir} -u ${solr::solr_user} -s ${solr::service_name} -p ${solr::solr_port}",
+    cwd     => "/opt/staging/solr-${solr::version}",
+    creates => "${solr::extract_dir}/solr-${solr::version}",
+    require => Staging::Deploy["solr-${solr::version}.tgz"],
   }
-  file { "/var/solr":
+  file { $solr::var_dir:
     ensure  => directory,
-    owner   => "solr",
-    group   => "solr",
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     recurse => true,
     require => Exec['run solr install script'],
   }
-  file { "/var/log/solr":
+  file { $solr::log_dir:
     ensure  => directory,
-    owner   => "solr",
-    group   => "solr",
+    owner   => $solr::solr_user,
+    group   => $solr::solr_user,
     require => Exec['run solr install script'],
   }
 }
