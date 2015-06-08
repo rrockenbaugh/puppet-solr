@@ -19,6 +19,7 @@ class solr (
   $install_dir = $::solr::params::install_dir,
   $java_home = $::solr::params::java_home,
   $java_mem = $::solr::params::java_mem,
+  $cloud = $::solr::params::cloud,
   $zk_ensemble = $::solr::params::zk_ensemble,
   $zk_timeout = $::solr::params::zk_timeout,
   $solr_host = $::solr::params::solr_host,

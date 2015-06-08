@@ -128,3 +128,6 @@ SOLR_HOME=<%= @solr_home %>
 LOG4J_PROPS=<%= @var_dir %>/log4j.properties
 SOLR_LOGS_DIR=<%= @log_dir %>
 SOLR_PORT=<%= @solr_port %>
+<% if @cloud -%>
+SOLR_MODE="solrcloud"
+<% end -%>
