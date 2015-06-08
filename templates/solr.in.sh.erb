@@ -51,7 +51,7 @@ GC_TUNE="-XX:NewRatio=3 \
 # e.g. host1:2181,host2:2181/chroot
 # Leave empty if not using SolrCloud
 <% if @zk_ensemble -%>
-ZK_HOST="<%= @zk_ensemble %>"
+ZK_HOST="<%= @zk_ensemble %>/solrcloud"
 <% else -%>
 #ZK_HOST=""
 <% end -%>
