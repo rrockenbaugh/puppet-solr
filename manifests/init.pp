@@ -20,6 +20,7 @@ class solr (
   $java_home = $::solr::params::java_home,
   $java_mem = $::solr::params::java_mem,
   $cloud = $::solr::params::cloud,
+  $upgrade = $::solr::params::upgrade,
   $zk_ensemble = $::solr::params::zk_ensemble,
   $zk_timeout = $::solr::params::zk_timeout,
   $solr_host = $::solr::params::solr_host,
@@ -42,6 +43,7 @@ class solr (
   validate_string( $zk_timeout )
   validate_string( $solr_host )
   validate_string( $solr_time )
+  validate_bool( $upgrade )
 
   class { '::solr::install': } ->
   class { '::solr::config': } ~>

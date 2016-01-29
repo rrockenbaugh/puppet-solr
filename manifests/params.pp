@@ -20,6 +20,7 @@ class solr::params {
   $zk_timeout  = '15000'
   $solr_host   = $::ipaddress
   $solr_time   = 'UTC'
+  $upgrade     = false
 
   case $::osfamily {
     'Debian', 'RedHat', 'Amazon': {
