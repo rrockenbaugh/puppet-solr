@@ -18,14 +18,14 @@
 # By default the script will use JAVA_HOME to determine which java
 # to use, but you can set a specific path for Solr to use without
 # affecting other Java applications on your server/workstation.
-<% if @java_home -%>
-SOLR_JAVA_HOME="<%= @java_home %>"
+<% if scope['solr::java_home'] -%>
+SOLR_JAVA_HOME="<%= scope['solr::java_home'] %>"
 <% else -%>
 #SOLR_JAVA_HOME=""
 <% end -%>
 
 # Increase Java Min/Max Heap as needed to support your indexing / query needs
-SOLR_JAVA_MEM="<%= @java_mem %>"
+SOLR_JAVA_MEM="<%= scope['solr::java_mem'] %>"
 
 # Enable verbose GC logging
 GC_LOG_OPTS="-verbose:gc -XX:+PrintHeapAtGC -XX:+PrintGCDetails \
@@ -50,30 +50,30 @@ GC_TUNE="-XX:NewRatio=3 \
 # Set the ZooKeeper connection string if using an external ZooKeeper ensemble
 # e.g. host1:2181,host2:2181/chroot
 # Leave empty if not using SolrCloud
-<% if @zk_ensemble -%>
-ZK_HOST="<%= @zk_ensemble %>/solrcloud"
+<% if scope['solr::zk_ensemble'] -%>
+ZK_HOST="<%= scope['solr::zk_ensemble'] %>/solrcloud"
 <% else -%>
 #ZK_HOST=""
 <% end -%>
 
 # Set the ZooKeeper client timeout (for SolrCloud mode)
-<% if @zk_ensemble -%>
-ZK_CLIENT_TIMEOUT="<%= @zk_timeout %>"
+<% if scope['solr::zk_ensemble'] -%>
+ZK_CLIENT_TIMEOUT="<%= scope['solr::zk_timeout'] %>"
 <% else -%>
 #ZK_CLIENT_TIMEOUT="15000"
 <% end -%>
 
 # By default the start script uses "localhost"; override the hostname here
 # for production SolrCloud environments to control the hostname exposed to cluster state
-<% if @zk_ensemble -%>
-SOLR_HOST="<%= @solr_host %>"
+<% if scope['solr::zk_ensemble'] -%>
+SOLR_HOST="<%= scope['solr::solr_host'] %>"
 <% else -%>
 #SOLR_HOST="192.168.1.1"
 <% end -%>
 
 # By default the start script uses UTC; override the timezone if needed
-<% if @zk_ensemble -%>
-SOLR_TIMEZONE="<%= @solr_time %>"
+<% if scope['solr::zk_ensemble'] -%>
+SOLR_TIMEZONE="<%= scope['solr::solr_time'] %>"
 <% else -%>
 #SOLR_TIMEZONE="UTC"
 <% end -%>
@@ -123,11 +123,11 @@ ENABLE_REMOTE_JMX_OPTS="false"
 # Uncomment to set a specific SSL port (-Djetty.ssl.port=N); if not set
 # and you are using SSL, then the start script will use SOLR_PORT for the SSL port
 #SOLR_SSL_PORT=
-SOLR_PID_DIR=<%= @var_dir %>
-SOLR_HOME=<%= @solr_home %>
-LOG4J_PROPS=<%= @var_dir %>/log4j.properties
-SOLR_LOGS_DIR=<%= @log_dir %>
-SOLR_PORT=<%= @solr_port %>
-<% if @cloud -%>
+SOLR_PID_DIR=<%= scope['solr::var_dir'] %>
+SOLR_HOME=<%= scope['solr::solr_home'] %>
+LOG4J_PROPS=<%= scope['solr::var_dir'] %>/log4j.properties
+SOLR_LOGS_DIR=<%= scope['solr::log_dir'] %>
+SOLR_PORT=<%= scope['solr::solr_port'] %>
+<% if scope['solr::cloud'] -%>
 SOLR_MODE="solrcloud"
 <% end -%>

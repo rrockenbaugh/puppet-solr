@@ -1,7 +1,7 @@
 ## MANAGED BY PUPPET
 #
 #  Logging level
-solr.log=<%= @log_dir %>
+solr.log=<%= scope['solr::log_dir'] %>
 log4j.rootLogger=INFO, file, CONSOLE
 
 log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
