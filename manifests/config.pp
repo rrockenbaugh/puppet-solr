@@ -24,10 +24,10 @@ class solr::config {
     group   => $solr::solr_user,
     content => template('solr/log4j.properties.erb'),
   }
-  #solr installs the servive in solr::install 
-  #file { "/etc/init.d/${solr::service_name}":
-  #  ensure  => file,
-  #  mode    => '0744',
-  #  content => template('solr/solr.init.erb'),
-  #}
+#solr installs the servive in solr::install 
+#  file { "/etc/init.d/${solr::service_name}":
+#    ensure  => file,
+#    mode    => '0744',
+#    content => template('solr/solr.init.erb'),
+#  }
 }
