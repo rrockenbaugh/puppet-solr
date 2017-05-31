@@ -4,7 +4,7 @@
 # It sets variables according to platform.
 #
 class solr::params {
-  $version     = '5.1.0'
+  $version     = '6.5.1'
   $mirror      = 'http://www.apache.org/dist/lucene/solr'
   $extract_dir = '/opt'
   $var_dir     = '/var/solr'
