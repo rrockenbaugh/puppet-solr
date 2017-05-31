@@ -47,6 +47,6 @@ class solr (
 
   class { '::solr::install': } ->
   class { '::solr::config': } ~>
-  class { '::solr::service': } ->
+#  class { '::solr::service': } ->
   Class['::solr']
 }
